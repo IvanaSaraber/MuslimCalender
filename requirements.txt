@@ -1,1 +1,3 @@
+pyairtable
+instaloader
 
