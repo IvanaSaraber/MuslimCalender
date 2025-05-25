@@ -1,1 +1,41 @@
+[
+  {
+    "EventName": "Iftar met de Buurt",
+    "EventType": "iftar",
+    "Description": "Een gezellige iftar voor buurtbewoners met eten, lezingen en samenkomst.",
+    "Date": "2025-03-28",
+    "StartTime": "18:30",
+    "EndTime": "21:00",
+    "Location": "Moskeeplein 1, Rotterdam",
+    "City": "Rotterdam",
+    "Gender": "gemengd",
+    "Organisation": "Stichting Salam",
+    "imageUrl": "https://via.placeholder.com/400x200.png?text=Iftar+Event"
+  },
+  {
+    "EventName": "Lezing: De Kracht van Geduld",
+    "EventType": "lezing",
+    "Description": "Een inspirerende lezing over sabr in moeilijke tijden.",
+    "Date": "2025-04-02",
+    "StartTime": "19:00",
+    "Location": "Islamitisch Centrum Utrecht",
+    "City": "Utrecht",
+    "Gender": "mannen",
+    "Organisation": "ICU",
+    "imageUrl": "https://via.placeholder.com/400x200.png?text=Lezing+Geduld"
+  },
+  {
+    "EventName": "Ramadan Bazaar",
+    "EventType": "bazaar",
+    "Description": "Kom langs voor hapjes, kleding, boeken en meer! Gezelligheid en goede doelen in één.",
+    "Date": "2025-04-05",
+    "StartTime": "12:00",
+    "EndTime": "17:00",
+    "Location": "Moskee Al-Houda, Eindhoven",
+    "City": "Eindhoven",
+    "Gender": "gemengd",
+    "Organisation": "Al-Houda",
+    "imageUrl": "https://via.placeholder.com/400x200.png?text=Ramadan+Bazaar"
+  }
+]
 
