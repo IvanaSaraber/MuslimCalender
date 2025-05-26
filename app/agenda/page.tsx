@@ -1,4 +1,3 @@
-// app/agenda/page.tsx — met icon toggle, zoekfunctie en dynamische weergave
 "use client";
 
 import { useState } from "react";
@@ -21,35 +20,41 @@ export default function AgendaPage() {
   });
 
   return (
-    <main className="p-4 max-w-5xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4">Agenda</h1>
+    <main className="p-4 max-w-4xl mx-auto">
+      <h1 className="text-3xl font-bold mb-4 text-center">Agenda</h1>
 
       {/* Zoekbalk */}
-      <input
-        type="text"
-        placeholder="Zoek op naam, type of stad..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        className="w-full mb-6 p-3 border rounded shadow-sm"
-      />
+      <div className="flex justify-center mb-6">
+        <input
+          type="text"
+          placeholder="🔍 Zoek op naam, type of stad..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="w-full md:w-2/3 px-4 py-3 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
+        />
+      </div>
 
       {/* Icon toggle */}
       <div className="flex justify-center gap-4 mb-6">
         <button
           onClick={() => setView("calendar")}
-          className={`p-2 rounded-full border transition ${
-            view === "calendar" ? "bg-primary text-white" : "text-gray-600"
+          className={`p-3 rounded-full border shadow transition ${
+            view === "calendar"
+              ? "bg-primary text-white scale-110"
+              : "text-gray-500 bg-white"
           }`}
         >
-          <CalendarDays size={24} />
+          <CalendarDays size={26} />
         </button>
         <button
           onClick={() => setView("list")}
-          className={`p-2 rounded-full border transition ${
-            view === "list" ? "bg-primary text-white" : "text-gray-600"
+          className={`p-3 rounded-full border shadow transition ${
+            view === "list"
+              ? "bg-primary text-white scale-110"
+              : "text-gray-500 bg-white"
           }`}
         >
-          <ListIcon size={24} />
+          <ListIcon size={26} />
         </button>
       </div>
 
