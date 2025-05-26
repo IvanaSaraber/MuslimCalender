@@ -1,5 +1,5 @@
-import { CalendarView } from "../components/CalendarView";
-import { ListView } from "../components/ListView";
+import { CalendarView } from "../components/CalendarView.tsx;
+import { ListView } from "../components/ListView.tsx";
 import events from "../data/events.json";
 
 export default function HomePage() {
