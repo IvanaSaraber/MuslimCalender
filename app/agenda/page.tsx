@@ -40,7 +40,7 @@ export default function AgendaPage() {
           onClick={() => setView("calendar")}
           className={`p-3 rounded-full border shadow transition ${
             view === "calendar"
-              ? "bg-primary text-white scale-110"
+              ? "bg-green-600 text-white"
               : "text-gray-500 bg-white"
           }`}
         >
