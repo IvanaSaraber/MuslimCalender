@@ -1,9 +1,11 @@
+// app/agenda/page.tsx — met icon toggle, zoekfunctie en dynamische weergave
 "use client";
 
 import { useState } from "react";
 import { CalendarView } from "../../components/CalendarView";
 import { ListView } from "../../components/ListView";
 import allEvents from "../../data/events.json";
+import { CalendarDays, List as ListIcon } from "lucide-react";
 
 export default function AgendaPage() {
   const [query, setQuery] = useState("");
@@ -31,36 +33,29 @@ export default function AgendaPage() {
         className="w-full mb-6 p-3 border rounded shadow-sm"
       />
 
-      {/* Toggle-knoppen */}
-      <div className="flex gap-4 mb-6">
+      {/* Icon toggle */}
+      <div className="flex justify-center gap-4 mb-6">
         <button
           onClick={() => setView("calendar")}
-          className={`px-4 py-2 rounded ${
-            view === "calendar"
-              ? "bg-green-600 text-white"
-              : "bg-white border text-gray-700"
+          className={`p-2 rounded-full border transition ${
+            view === "calendar" ? "bg-primary text-white" : "text-gray-600"
           }`}
         >
-          Kalender
+          <CalendarDays size={24} />
         </button>
         <button
           onClick={() => setView("list")}
-          className={`px-4 py-2 rounded ${
-            view === "list"
-              ? "bg-green-600 text-white"
-              : "bg-white border text-gray-700"
+          className={`p-2 rounded-full border transition ${
+            view === "list" ? "bg-primary text-white" : "text-gray-600"
           }`}
         >
-          Lijst
+          <ListIcon size={24} />
         </button>
       </div>
 
       {/* Dynamische weergave */}
-      {view === "calendar" ? (
-        <CalendarView events={filteredEvents} />
-      ) : (
-        <ListView events={filteredEvents} />
-      )}
+      {view === "calendar" && <CalendarView events={filteredEvents} />}
+      {view === "list" && <ListView events={filteredEvents} />}
     </main>
   );
 }
