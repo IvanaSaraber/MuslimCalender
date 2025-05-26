@@ -21,7 +21,7 @@ export default function AgendaPage() {
 
   return (
     <main className="p-4 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4 text-center">Agenda</h1>
+      <h1 className="text-3xl font-bold mb-4 text-red-600 text-center">Agenda</h1>
 
       {/* Zoekbalk */}
       <div className="flex justify-center mb-6">
