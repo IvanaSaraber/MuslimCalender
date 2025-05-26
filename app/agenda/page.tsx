@@ -1,6 +1,6 @@
-import { CalendarView } from "../components/CalendarView";
-import { ListView } from "../components/ListView";
-import events from "../data/events.json";
+import { CalendarView } from "../../components/CalendarView";
+import { ListView } from "../../components/ListView";
+import events from "../../data/events.json";
 
 export default function HomePage() {
   return (
