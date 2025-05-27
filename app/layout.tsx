@@ -1,3 +1,5 @@
+import "../styles/globals.css";
+
 export const metadata = {
   title: "Islamic Events App",
   description: "Overzicht van islamitische evenementen in Nederland",
