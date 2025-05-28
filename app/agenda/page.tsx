@@ -1,11 +1,11 @@
-// app/agenda/page.tsx — vernieuwde styling met nude-tinten en neutrale zoekicoon
+// app/agenda/page.tsx — met icon toggle, zoekfunctie en dynamische weergave
 "use client";
 
 import { useState } from "react";
 import { CalendarView } from "../../components/CalendarView";
 import { ListView } from "../../components/ListView";
 import allEvents from "../../data/events.json";
-import { List as ListIcon, Search } from "lucide-react";
+import { CalendarDays, List as ListIcon } from "lucide-react";
 
 export default function AgendaPage() {
   const [query, setQuery] = useState("");
@@ -21,40 +21,41 @@ export default function AgendaPage() {
   });
 
   return (
-    <main className="p-4 max-w-4xl mx-auto bg-[#fdf9f5] min-h-screen">
-      <h1 className="text-3xl font-bold mb-6 text-[#453c36] text-center font-serif">
-        Agenda
-      </h1>
+    <main className="p-4 max-w-4xl mx-auto">
+      <h1 className="text-3xl font-bold mb-4 text-red-600 text-center">Agenda</h1>
 
       {/* Zoekbalk */}
-      <div className="flex justify-center mb-6 relative">
+      <div className="flex justify-center mb-6">
         <input
           type="text"
-          placeholder="Zoek op naam, type of stad..."
+          placeholder="🔍 Zoek op naam, type of stad..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full md:w-2/3 px-4 py-3 border border-[#ddd2c9] rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-[#e2cfc3] bg-white text-[#453c36] placeholder-[#8b817a]"
+          className="w-full md:w-2/3 px-4 py-3 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
         />
-        <Search size={20} className="absolute right-6 top-1/2 transform -translate-y-1/2 text-[#8b817a]" />
       </div>
 
       {/* Icon toggle */}
       <div className="flex justify-center gap-4 mb-6">
         <button
           onClick={() => setView("calendar")}
-          className={`p-3 rounded-full border border-[#ddd2c9] shadow transition duration-200 ${
-            view === "calendar" ? "bg-[#e2cfc3] text-white scale-105" : "text-[#453c36] bg-white"
+          className={`p-3 rounded-full border shadow transition ${
+            view === "calendar"
+              ? "bg-green-600 text-white"
+              : "text-gray-500 bg-white"
           }`}
         >
-          📅
+          <CalendarDays size={26} />
         </button>
         <button
           onClick={() => setView("list")}
-          className={`p-3 rounded-full border border-[#ddd2c9] shadow transition duration-200 ${
-            view === "list" ? "bg-[#e2cfc3] text-white scale-105" : "text-[#453c36] bg-white"
+          className={`p-3 rounded-full border shadow transition ${
+            view === "list"
+              ? "bg-primary text-white scale-110"
+              : "text-gray-500 bg-white"
           }`}
         >
-          <ListIcon size={24} />
+          <ListIcon size={26} />
         </button>
       </div>
 
