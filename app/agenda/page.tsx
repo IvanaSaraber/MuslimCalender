@@ -1,3 +1,4 @@
+// app/agenda/page.tsx — vernieuwd met app-achtige layout en styling
 "use client";
 
 import { useState } from "react";
@@ -20,11 +21,12 @@ export default function AgendaPage() {
   });
 
   return (
-    <main className="p-4 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4 text-red-600 text-center">Agenda</h1>
+    <main className="px-4 pt-6 pb-24 max-w-4xl mx-auto bg-nude text-gray-800 min-h-screen">
+      {/* Titel */}
+      <h1 className="text-xl font-semibold mb-4 text-center">Agenda van Evenementen</h1>
 
       {/* Zoekbalk */}
-      <div className="flex justify-center mb-6">
+      <div className="flex justify-center mb-4">
         <input
           type="text"
           placeholder="🔍 Zoek op naam, type of stad..."
@@ -34,33 +36,31 @@ export default function AgendaPage() {
         />
       </div>
 
-      {/* Icon toggle */}
-      <div className="flex justify-center gap-4 mb-6">
+      {/* View toggle icons */}
+      <div className="flex justify-center gap-6 mb-6">
         <button
           onClick={() => setView("calendar")}
-          className={`p-3 rounded-full border shadow transition ${
-            view === "calendar"
-              ? "bg-green-600 text-white"
-              : "text-gray-500 bg-white"
+          className={`p-3 rounded-xl border transition shadow-sm ${
+            view === "calendar" ? "bg-primary text-white" : "bg-white text-gray-500"
           }`}
         >
-          <CalendarDays size={26} />
+          <CalendarDays size={24} />
         </button>
         <button
           onClick={() => setView("list")}
-          className={`p-3 rounded-full border shadow transition ${
-            view === "list"
-              ? "bg-primary text-white scale-110"
-              : "text-gray-500 bg-white"
+          className={`p-3 rounded-xl border transition shadow-sm ${
+            view === "list" ? "bg-primary text-white" : "bg-white text-gray-500"
           }`}
         >
-          <ListIcon size={26} />
+          <ListIcon size={24} />
         </button>
       </div>
 
       {/* Dynamische weergave */}
-      {view === "calendar" && <CalendarView events={filteredEvents} />}
-      {view === "list" && <ListView events={filteredEvents} />}
+      <div className="rounded-xl overflow-hidden">
+        {view === "calendar" && <CalendarView events={filteredEvents} />}
+        {view === "list" && <ListView events={filteredEvents} />}
+      </div>
     </main>
   );
 }
