@@ -1,10 +1,11 @@
+// app/upload/page.tsx — directe keuze op startpagina + betere UX
 "use client";
 
 import { useState } from "react";
-import { CalendarPlus, FileImage, PenBox } from "lucide-react";
+import { CalendarPlus, Upload, Pencil } from "lucide-react";
 
 export default function UploadPage() {
-  const [step, setStep] = useState<"intro" | "choose" | "manual" | "flyer">("intro");
+  const [step, setStep] = useState<"intro" | "manual" | "flyer">("intro");
 
   const [formData, setFormData] = useState({
     EventName: "",
@@ -49,31 +50,22 @@ export default function UploadPage() {
   return (
     <main className="p-4 max-w-2xl mx-auto">
       {step === "intro" && (
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-6">
           <CalendarPlus size={48} className="mx-auto text-green-600" />
           <h1 className="text-2xl font-bold">Evenement toevoegen aan de agenda</h1>
-          <p className="text-gray-600">Help anderen door jouw evenement zichtbaar te maken. Kies hoe je dit wilt doen.</p>
-          <button onClick={() => setStep("choose")} className="bg-green-600 text-white px-4 py-2 rounded">
-            Ga verder
-          </button>
-        </div>
-      )}
-
-      {step === "choose" && (
-        <div className="text-center space-y-6">
-          <h2 className="text-xl font-semibold">Hoe wil je je evenement toevoegen?</h2>
+          <p className="text-gray-600 mb-4">Je kunt handmatig gegevens invullen of een flyer uploaden. Kies hieronder:</p>
           <div className="flex flex-col gap-4">
             <button
               onClick={() => setStep("manual")}
               className="flex items-center gap-2 justify-center border p-3 rounded shadow hover:bg-gray-50"
             >
-              <PenBox size={20} /> Handmatig invoeren
+              <Pencil size={20} /> Handmatig invoeren
             </button>
             <button
               onClick={() => setStep("flyer")}
               className="flex items-center gap-2 justify-center border p-3 rounded shadow hover:bg-gray-50"
             >
-              <FileImage size={20} /> Alleen flyer uploaden
+              <Upload size={20} /> Alleen flyer uploaden
             </button>
           </div>
         </div>
