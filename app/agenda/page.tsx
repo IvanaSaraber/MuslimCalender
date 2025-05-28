@@ -1,4 +1,4 @@
-// app/agenda/page.tsx — met icon toggle, zoekfunctie en dynamische weergave + vernieuwde styling
+// app/agenda/page.tsx — vernieuwde styling in zachte, professionele app-stijl
 "use client";
 
 import { useState } from "react";
@@ -21,9 +21,9 @@ export default function AgendaPage() {
   });
 
   return (
-    <main className="px-4 py-6 max-w-4xl mx-auto bg-neutral-50 min-h-screen rounded-xl shadow-md">
-      <h1 className="text-3xl font-semibold mb-6 text-center text-neutral-800">
-        📅 Agenda
+    <main className="bg-[#FAF9F6] min-h-screen p-4 sm:p-6 md:p-8 max-w-5xl mx-auto font-sans">
+      <h1 className="text-4xl font-semibold mb-6 text-center text-[#2D3A3A] tracking-tight">
+        📅 Islamic Events Agenda
       </h1>
 
       {/* Zoekbalk */}
@@ -33,34 +33,37 @@ export default function AgendaPage() {
           placeholder="🔍 Zoek op naam, type of stad..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full md:w-2/3 px-4 py-3 border border-neutral-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-400 bg-white text-sm"
+          className="w-full md:w-3/4 lg:w-2/3 px-5 py-3 border border-[#E3E3E3] rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-[#B4C7B4] text-gray-700 bg-white"
         />
       </div>
 
-      {/* Icon toggle */}
-      <div className="flex justify-center gap-4 mb-8">
+      {/* Toggle-knoppen */}
+      <div className="flex justify-center gap-6 mb-6">
         <button
           onClick={() => setView("calendar")}
-          className={`p-3 rounded-full border transition ${
-            view === "calendar" ? "bg-teal-500 text-white" : "text-gray-500 bg-white"
+          className={`p-3 rounded-xl border-2 transition shadow-sm flex items-center justify-center w-12 h-12 ${
+            view === "calendar" ? "bg-[#B4C7B4] text-white border-[#B4C7B4]" : "text-gray-500 border-gray-300 bg-white"
           }`}
         >
-          <CalendarDays size={24} />
+          <CalendarDays size={22} />
         </button>
         <button
           onClick={() => setView("list")}
-          className={`p-3 rounded-full border transition ${
-            view === "list" ? "bg-teal-500 text-white" : "text-gray-500 bg-white"
+          className={`p-3 rounded-xl border-2 transition shadow-sm flex items-center justify-center w-12 h-12 ${
+            view === "list" ? "bg-[#B4C7B4] text-white border-[#B4C7B4]" : "text-gray-500 border-gray-300 bg-white"
           }`}
         >
-          <ListIcon size={24} />
+          <ListIcon size={22} />
         </button>
       </div>
 
-      {/* Dynamische weergave */}
-      <div className="bg-white rounded-xl p-4 shadow">
-        {view === "calendar" && <CalendarView events={filteredEvents} />}
-        {view === "list" && <ListView events={filteredEvents} />}
+      {/* Weergave */}
+      <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6">
+        {view === "calendar" ? (
+          <CalendarView events={filteredEvents} />
+        ) : (
+          <ListView events={filteredEvents} />
+        )}
       </div>
     </main>
   );
