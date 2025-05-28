@@ -1,4 +1,4 @@
-// app/agenda/page.tsx — vernieuwd met app-achtige layout en styling
+// app/agenda/page.tsx — met icon toggle, zoekfunctie en dynamische weergave + vernieuwde styling
 "use client";
 
 import { useState } from "react";
@@ -21,35 +21,36 @@ export default function AgendaPage() {
   });
 
   return (
-    <main className="px-4 pt-6 pb-24 max-w-4xl mx-auto bg-nude text-gray-800 min-h-screen">
-      {/* Titel */}
-      <h1 className="text-xl font-semibold mb-4 text-center">Agenda van Evenementen</h1>
+    <main className="px-4 py-6 max-w-4xl mx-auto bg-neutral-50 min-h-screen rounded-xl shadow-md">
+      <h1 className="text-3xl font-semibold mb-6 text-center text-neutral-800">
+        📅 Agenda
+      </h1>
 
       {/* Zoekbalk */}
-      <div className="flex justify-center mb-4">
+      <div className="flex justify-center mb-6">
         <input
           type="text"
           placeholder="🔍 Zoek op naam, type of stad..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full md:w-2/3 px-4 py-3 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
+          className="w-full md:w-2/3 px-4 py-3 border border-neutral-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-400 bg-white text-sm"
         />
       </div>
 
-      {/* View toggle icons */}
-      <div className="flex justify-center gap-6 mb-6">
+      {/* Icon toggle */}
+      <div className="flex justify-center gap-4 mb-8">
         <button
           onClick={() => setView("calendar")}
-          className={`p-3 rounded-xl border transition shadow-sm ${
-            view === "calendar" ? "bg-primary text-white" : "bg-white text-gray-500"
+          className={`p-3 rounded-full border transition ${
+            view === "calendar" ? "bg-teal-500 text-white" : "text-gray-500 bg-white"
           }`}
         >
           <CalendarDays size={24} />
         </button>
         <button
           onClick={() => setView("list")}
-          className={`p-3 rounded-xl border transition shadow-sm ${
-            view === "list" ? "bg-primary text-white" : "bg-white text-gray-500"
+          className={`p-3 rounded-full border transition ${
+            view === "list" ? "bg-teal-500 text-white" : "text-gray-500 bg-white"
           }`}
         >
           <ListIcon size={24} />
@@ -57,7 +58,7 @@ export default function AgendaPage() {
       </div>
 
       {/* Dynamische weergave */}
-      <div className="rounded-xl overflow-hidden">
+      <div className="bg-white rounded-xl p-4 shadow">
         {view === "calendar" && <CalendarView events={filteredEvents} />}
         {view === "list" && <ListView events={filteredEvents} />}
       </div>
