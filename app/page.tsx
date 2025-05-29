@@ -1,29 +1,90 @@
-// app/page.tsx (Nieuwe startpagina met navigatie)
-import Link from "next/link";
+// app/page.tsx — homepage met geïntegreerde spotlight, kalender & lijstweergave
+"use client";
+
+import { useState } from "react";
+import { CalendarView } from "../components/CalendarView";
+import { ListView } from "../components/ListView";
+import allEvents from "../data/events.json";
+import { CalendarDays, List as ListIcon, Search } from "lucide-react";
 
 export default function HomePage() {
+  const [query, setQuery] = useState("");
+  const [view, setView] = useState<"list" | "calendar">("calendar");
+
+  const filteredEvents = allEvents.filter((event) => {
+    const q = query.toLowerCase();
+    return (
+      event.EventName.toLowerCase().includes(q) ||
+      event.EventType?.toLowerCase().includes(q) ||
+      event.City?.toLowerCase().includes(q)
+    );
+  });
+
   return (
-    <main className="p-6 max-w-3xl mx-auto text-center space-y-6">
-      <h1 className="text-4xl font-bold">MuslimCalender</h1>
-      <p className="text-lg text-gray-700">
-        Ontdek islamitische evenementen in jouw buurt. Bekijk iftars, lezingen, bazaars en meer — overzichtelijk in lijst-, kalender- of kaartweergave.
-      </p>
-      <div className="flex flex-col gap-4 md:flex-row md:justify-center">
-        <Link href="/agenda" className="bg-green-600 text-white px-6 py-3 rounded-xl hover:bg-green-700 transition">
-          Bekijk Agenda
-        </Link>
-        <Link href="/recent" className="bg-white border px-6 py-3 rounded-xl hover:bg-gray-100 transition">
-          Meest Recent Toegevoegd
-        </Link>
+    <main className="bg-[#fefaf5] min-h-screen px-4 py-6 max-w-5xl mx-auto">
+      {/* Spotlight events */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+        {filteredEvents.slice(0, 3).map((event, idx) => (
+          <div
+            key={idx}
+            className="bg-white rounded-xl overflow-hidden shadow-md text-center p-3"
+          >
+            <img
+              src={event.imageUrl}
+              alt={event.EventName}
+              className="rounded-lg w-full h-28 object-cover mb-2"
+            />
+            <h3 className="text-[15px] font-semibold text-[#422c1b]">
+              {event.EventName}
+            </h3>
+            <p className="text-sm text-[#7b5e48]">{event.Date}</p>
+            <p className="text-sm text-[#7b5e48]">{event.City}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* View toggle + zoekfunctie */}
+      <div className="flex justify-end items-center gap-2 mb-4">
+        <button
+          onClick={() => setView("calendar")}
+          className={`p-2 rounded-xl transition ${
+            view === "calendar"
+              ? "bg-[#c9b6a0] text-white"
+              : "bg-white border border-[#e1d8cf] text-[#5f5247]"
+          }`}
+        >
+          <CalendarDays size={18} />
+        </button>
+        <button
+          onClick={() => setView("list")}
+          className={`p-2 rounded-xl transition ${
+            view === "list"
+              ? "bg-[#c9b6a0] text-white"
+              : "bg-white border border-[#e1d8cf] text-[#5f5247]"
+          }`}
+        >
+          <ListIcon size={18} />
+        </button>
+        <div className="relative ml-2">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9c8f85]" size={16} />
+          <input
+            type="text"
+            placeholder="Zoek..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="pl-9 pr-3 py-1.5 text-sm border border-[#e1d8cf] rounded-xl bg-white text-[#5f5247] placeholder-[#a09388] focus:outline-none"
+          />
+        </div>
+      </div>
+
+      {/* Weergave */}
+      <div className="bg-white p-4 rounded-2xl shadow">
+        {view === "calendar" ? (
+          <CalendarView events={filteredEvents} />
+        ) : (
+          <ListView events={filteredEvents} />
+        )}
       </div>
     </main>
   );
 }
-
-// Nieuwe routes zullen o.a. zijn:
-// - /agenda (pagina met lijst/kalender switch)
-// - /recent (highlightpagina)
-// - /upload (voor flyer-invoer)
-// Deze kunnen we stapsgewijs implementeren met component-optimalisatie & performance caching.
-
-
