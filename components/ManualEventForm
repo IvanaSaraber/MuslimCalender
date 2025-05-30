@@ -1,0 +1,137 @@
+// app/components/ManualEventForm.tsx
+"use client";
+
+import { useState } from "react";
+
+export default function ManualEventForm() {
+  const [formData, setFormData] = useState({
+    EventName: "",
+    StartTime: "",
+    EndTime: "",
+    City: "",
+    Flyer: null,
+  });
+  const [uploading, setUploading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const cities = [
+    "Amsterdam", "Rotterdam", "Den Haag", "Utrecht", "Eindhoven", "Tilburg",
+    "Groningen", "Almere", "Breda", "Nijmegen", "Enschede", "Apeldoorn",
+    "Haarlem", "Arnhem", "Zaanstad", "Amersfoort", "Haarlemmermeer",
+    "Den Bosch", "Zwolle", "Zoetermeer", "Leiden", "Maastricht", "Dordrecht",
+    "Ede", "Westland", "Venlo", "Delft", "Deventer", "Helmond", "Overig"
+  ];
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, files } = e.target as HTMLInputElement;
+    setFormData({
+      ...formData,
+      [name]: files ? files[0] : value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setUploading(true);
+    const body = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value) body.append(key, value);
+    });
+
+    try {
+      const res = await fetch("/api/submit-event", {
+        method: "POST",
+        body,
+      });
+      if (res.ok) {
+        setSuccess(true);
+        setFormData({ EventName: "", StartTime: "", EndTime: "", City: "", Flyer: null });
+      }
+    } catch (err) {
+      console.error("Upload error:", err);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6 max-w-xl mx-auto p-4 bg-white shadow rounded-xl">
+      <h2 className="text-xl font-semibold text-gray-800">Voeg handmatig een evenement toe</h2>
+
+      <div>
+        <label htmlFor="EventName" className="block font-medium text-sm text-gray-700">Naam evenement</label>
+        <input
+          type="text"
+          name="EventName"
+          value={formData.EventName}
+          onChange={handleChange}
+          required
+          className="w-full rounded border p-2"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="StartTime" className="block font-medium text-sm text-gray-700">Begintijd</label>
+        <input
+          type="time"
+          name="StartTime"
+          value={formData.StartTime}
+          onChange={handleChange}
+          required
+          className="w-full rounded border p-2"
+        />
+        <p className="text-xs text-gray-500 mt-1">Bijv. 18:00</p>
+      </div>
+
+      <div>
+        <label htmlFor="EndTime" className="block font-medium text-sm text-gray-700">Eindtijd</label>
+        <input
+          type="time"
+          name="EndTime"
+          value={formData.EndTime}
+          onChange={handleChange}
+          required
+          className="w-full rounded border p-2"
+        />
+        <p className="text-xs text-gray-500 mt-1">Bijv. 20:30</p>
+      </div>
+
+      <div>
+        <label htmlFor="City" className="block font-medium text-sm text-gray-700">Stad</label>
+        <select
+          name="City"
+          value={formData.City}
+          onChange={handleChange}
+          required
+          className="w-full rounded border p-2"
+        >
+          <option value="">Selecteer een stad</option>
+          {cities.map(city => (
+            <option key={city} value={city}>{city}</option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="Flyer" className="block font-medium text-sm text-gray-700">Upload flyer (optioneel)</label>
+        <input
+          type="file"
+          name="Flyer"
+          accept="image/*,application/pdf"
+          onChange={handleChange}
+          className="w-full rounded border p-2"
+        />
+      </div>
+
+      <button
+        type="submit"
+        disabled={uploading}
+        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+      >
+        {uploading ? "Bezig met uploaden..." : "Verstuur evenement"}
+      </button>
+
+      {success && <p className="text-green-600 mt-2">Evenement succesvol toegevoegd!</p>}
+    </form>
+  );
+}
