@@ -1,4 +1,3 @@
-// app/agenda/page.tsx — hersteld naar fijne middenstijl, met zoekicoon en zachte styling
 "use client";
 
 import { useState } from "react";
@@ -21,50 +20,71 @@ export default function AgendaPage() {
   });
 
   return (
-    <main className="p-4 max-w-5xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4 text-center text-gray-800">Agenda</h1>
-
-      {/* Zoekbalk met icoon */}
-      <div className="relative flex justify-center mb-6">
-        <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500">
-          <Search size={20} />
-        </span>
-        <input
-          type="text"
-          placeholder="Zoek op naam, type of stad..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="w-full md:w-2/3 pl-10 pr-4 py-3 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-neutral-400 text-gray-800"
-        />
+    <main className="bg-[#fefaf5] min-h-screen px-4 py-6 max-w-5xl mx-auto">
+      {/* Highlights hierboven (eventueel aparte component later) */}
+      <div className="grid grid-cols-3 gap-4 mb-8">
+        {filteredEvents.slice(0, 3).map((event, idx) => (
+          <div
+            key={idx}
+            className="bg-white rounded-xl overflow-hidden shadow-md text-center p-3"
+          >
+            <img
+              src={event.imageUrl}
+              alt={event.EventName}
+              className="rounded-lg w-full h-28 object-cover mb-2"
+            />
+            <h3 className="text-[15px] font-semibold text-[#422c1b]">
+              {event.EventName}
+            </h3>
+            <p className="text-sm text-[#7b5e48]">{event.Date}</p>
+            <p className="text-sm text-[#7b5e48]">{event.City}</p>
+          </div>
+        ))}
       </div>
 
-      {/* Icon toggle */}
-      <div className="flex justify-center gap-4 mb-6">
+      {/* Toggle & zoekfunctie */}
+      <div className="flex justify-end items-center gap-2 mb-4">
         <button
           onClick={() => setView("calendar")}
-          className={`p-3 rounded-full border shadow transition ${
+          className={`p-2 rounded-xl transition ${
             view === "calendar"
-              ? "bg-neutral-800 text-white"
-              : "text-gray-500 bg-white"
+              ? "bg-[#c9b6a0] text-white"
+              : "bg-white border border-[#e1d8cf] text-[#5f5247]"
           }`}
         >
-          <CalendarDays size={24} />
+          <CalendarDays size={18} />
         </button>
         <button
           onClick={() => setView("list")}
-          className={`p-3 rounded-full border shadow transition ${
+          className={`p-2 rounded-xl transition ${
             view === "list"
-              ? "bg-neutral-800 text-white"
-              : "text-gray-500 bg-white"
+              ? "bg-[#c9b6a0] text-white"
+              : "bg-white border border-[#e1d8cf] text-[#5f5247]"
           }`}
         >
-          <ListIcon size={24} />
+          <ListIcon size={18} />
         </button>
+        <div className="relative ml-2">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9c8f85]" size={16} />
+          <input
+            type="text"
+            placeholder="Zoek..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="pl-9 pr-3 py-1.5 text-sm border border-[#e1d8cf] rounded-xl bg-white text-[#5f5247] placeholder-[#a09388] focus:outline-none"
+          />
+        </div>
       </div>
 
-      {/* Dynamische weergave */}
-      {view === "calendar" && <CalendarView events={filteredEvents} />}
-      {view === "list" && <ListView events={filteredEvents} />}
+      {/* Inhoud */}
+      <div className="bg-white p-4 rounded-2xl shadow">
+        {view === "calendar" ? (
+          <CalendarView events={filteredEvents} />
+        ) : (
+          <ListView events={filteredEvents} />
+        )}
+      </div>
     </main>
   );
 }
+
