@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { airtable } from "@/lib/airtable";
+import { eventTableRef } from "../../../lib/airtable";
 
 export async function POST(req: Request) {
   try {
