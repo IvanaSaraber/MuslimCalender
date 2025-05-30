@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { eventTableRef } from "../../../lib/airtable";
+import { airtable } from "../../../lib/airtable"; // <- correcte import
 
 export async function POST(req: Request) {
   try {
@@ -8,6 +8,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("Fout bij toevoegen aan Airtable:", error);
-    return NextResponse.json({ ok: false }, { status: 500 });
+    return NextResponse.json({ ok: false, error: "Mislukt" }, { status: 500 });
   }
 }
+
