@@ -1,10 +1,12 @@
+// app/agenda/page.tsx
 "use client";
 
 import { useState } from "react";
 import { CalendarView } from "../../components/CalendarView";
 import { ListView } from "../../components/ListView";
 import allEvents from "../../data/events.json";
-import { CalendarDays, List as ListIcon, Search } from "lucide-react";
+import { CalendarDays, List as ListIcon, Search, PlusCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function AgendaPage() {
   const [query, setQuery] = useState("");
@@ -20,9 +22,22 @@ export default function AgendaPage() {
   });
 
   return (
-    <main className="bg-[#fefaf5] min-h-screen px-4 py-6 max-w-5xl mx-auto">
-      {/* Highlights hierboven (eventueel aparte component later) */}
-      <div className="grid grid-cols-3 gap-4 mb-8">
+    <main className="bg-[#fefaf5] min-h-screen px-4 py-6 max-w-5xl mx-auto relative">
+      {/* Titel */}
+      <h2 className="text-xl font-semibold text-[#5f5247] mb-4">
+        Jouw islamitisch eventoverzicht
+      </h2>
+
+      {/* Floating button naar uploadform */}
+      <Link
+        href="/upload"
+        className="fixed bottom-5 right-5 bg-[#c9b6a0] text-white px-4 py-3 rounded-full shadow-lg hover:bg-[#bba58e]"
+      >
+        <PlusCircle size={20} />
+      </Link>
+
+      {/* Highlights */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
         {filteredEvents.slice(0, 3).map((event, idx) => (
           <div
             key={idx}
@@ -87,4 +102,3 @@ export default function AgendaPage() {
     </main>
   );
 }
-
