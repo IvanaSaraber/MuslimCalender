@@ -1,10 +1,11 @@
-import { Api } from "pyairtable";
+import Airtable from "airtable";
 
 const apiKey = process.env.AIRTABLE_API_KEY!;
 const baseId = process.env.AIRTABLE_BASE_ID!;
-const tableName = process.env.EVENT_TABLE || "EventRecords";
+const organisationTable = process.env.ORGANISATION_TABLE || "OrganisationData";
+const eventTable = process.env.EVENT_TABLE || "EventRecords";
 
-const api = new Api(apiKey);
-const eventTable = api.base(baseId).table(tableName);
+const base = new Airtable({ apiKey }).base(baseId);
 
-export default eventTable;
+export const organisationTableRef = base(organisationTable);
+export const eventTableRef = base(eventTable);
