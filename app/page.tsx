@@ -4,7 +4,8 @@ import { useState } from "react";
 import { CalendarView } from "../components/CalendarView";
 import { ListView } from "../components/ListView";
 import allEvents from "../data/events.json";
-import { CalendarDays, List as ListIcon, Search } from "lucide-react";
+import { CalendarDays, List as ListIcon, Search, Plus } from "lucide-react";
+import Link from "next/link";
 
 export default function HomePage() {
   const [query, setQuery] = useState("");
@@ -13,16 +14,16 @@ export default function HomePage() {
   const filteredEvents = allEvents.filter((event) => {
     const q = query.toLowerCase();
     return (
-      event.EventName.toLowerCase().includes(q) ||
+      event.EventName?.toLowerCase().includes(q) ||
       event.EventType?.toLowerCase().includes(q) ||
       event.City?.toLowerCase().includes(q)
     );
   });
 
   return (
-    <main className="bg-[#fefaf5] min-h-screen px-4 py-6 max-w-5xl mx-auto">
+    <main className="bg-[#fefaf5] min-h-screen px-4 py-6 max-w-5xl mx-auto relative">
       {/* Highlights */}
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         {filteredEvents.slice(0, 3).map((event, idx) => (
           <div
             key={idx}
@@ -42,7 +43,7 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* Toggle & zoekfunctie */}
+      {/* Toggle + zoekfunctie */}
       <div className="flex justify-end items-center gap-2 mb-4">
         <button
           onClick={() => setView("calendar")}
@@ -76,7 +77,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Inhoud */}
+      {/* Eventweergave */}
       <div className="bg-white p-4 rounded-2xl shadow">
         {view === "calendar" ? (
           <CalendarView events={filteredEvents} />
@@ -84,6 +85,15 @@ export default function HomePage() {
           <ListView events={filteredEvents} />
         )}
       </div>
+
+      {/* Upload knop */}
+      <Link href="/upload">
+        <div className="fixed bottom-6 right-6 z-50">
+          <button className="bg-[#c9b6a0] hover:bg-[#bba795] transition text-white rounded-full p-4 shadow-xl">
+            <Plus size={24} />
+          </button>
+        </div>
+      </Link>
     </main>
   );
 }
