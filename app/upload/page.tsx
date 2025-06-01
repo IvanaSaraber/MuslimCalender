@@ -15,7 +15,7 @@ export default function UploadEventPage() {
       </div>
 
       <div className="w-full flex flex-col gap-4">
-        <Link href="/upload-event/manual">
+        <Link href="/upload/form">
           <div className="bg-white p-5 rounded-xl shadow border border-[#e1d8cf] hover:bg-[#f3eee9] transition cursor-pointer">
             <h2 className="font-semibold text-[#422c1b] mb-1">Handmatig invoeren</h2>
             <p className="text-sm text-[#7b5e48]">
