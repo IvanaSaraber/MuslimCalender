@@ -6,3 +6,8 @@
   @apply w-full px-4 py-2 border rounded shadow-sm;
 }
 
+.input {
+  @apply w-full px-4 py-2 border border-[#e1d8cf] rounded-xl bg-white text-[#5f5247] placeholder-[#a09388] focus:outline-none;
+}
+
+
