@@ -1,4 +1,3 @@
-// app/page.tsx — homepage met geïntegreerde spotlight, kalender & lijstweergave
 "use client";
 
 import { useState } from "react";
@@ -22,8 +21,8 @@ export default function HomePage() {
 
   return (
     <main className="bg-[#fefaf5] min-h-screen px-4 py-6 max-w-5xl mx-auto">
-      {/* Spotlight events */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+      {/* Highlights */}
+      <div className="grid grid-cols-3 gap-4 mb-8">
         {filteredEvents.slice(0, 3).map((event, idx) => (
           <div
             key={idx}
@@ -43,7 +42,7 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* View toggle + zoekfunctie */}
+      {/* Toggle & zoekfunctie */}
       <div className="flex justify-end items-center gap-2 mb-4">
         <button
           onClick={() => setView("calendar")}
@@ -77,7 +76,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Weergave */}
+      {/* Inhoud */}
       <div className="bg-white p-4 rounded-2xl shadow">
         {view === "calendar" ? (
           <CalendarView events={filteredEvents} />
