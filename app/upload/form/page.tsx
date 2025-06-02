@@ -4,13 +4,14 @@ import { useState } from "react";
 import { Clock, MapPin, CalendarDays, Building2 } from "lucide-react";
 
 const cities = [
-  "Amsterdam", "Rotterdam", "Den Haag", "Utrecht", "Eindhoven", "Tilburg", "Groningen", "Almere",
-  "Breda", "Nijmegen", "Enschede", "Apeldoorn", "Haarlem", "Arnhem", "Zaanstad", "Amersfoort",
-  "Haarlemmermeer", "s-Hertogenbosch", "Zwolle", "Zoetermeer", "Leiden", "Maastricht", "Dordrecht",
-  "Ede", "Emmen", "Westland", "Venlo", "Delft", "Deventer", "Sittard-Geleen", "Helmond", "Heerlen",
-  "Lelystad", "Alkmaar", "Leeuwarden", "Alphen aan den Rijn", "Almelo", "Gouda", "Assen", "Roosendaal",
-  "Bergen op Zoom", "Rijswijk", "Oss", "Hoorn", "Veenendaal", "Purmerend", "Middelburg", "Zeist",
-  "Katwijk", "Nieuwegein", "Doetinchem", "Overig"
+  "Alkmaar", "Almelo", "Almere", "Alphen aan den Rijn", "Amersfoort", "Amsterdam",
+  "Apeldoorn", "Arnhem", "Assen", "Bergen op Zoom", "Breda", "Delft", "Den Haag",
+  "Deventer", "Dordrecht", "Doetinchem", "Ede", "Eindhoven", "Emmen", "Enschede",
+  "Gouda", "Groningen", "Haarlem", "Haarlemmermeer", "Heerlen", "Helmond", "Hoorn",
+  "Katwijk", "Leeuwarden", "Leiden", "Lelystad", "Maastricht", "Middelburg",
+  "Nieuwegein", "Nijmegen", "Oss", "Overig", "Purmerend", "Rijswijk", "Roosendaal",
+  "Rotterdam", "Sittard-Geleen", "s-Hertogenbosch", "Tilburg", "Utrecht", "Veenendaal",
+  "Venlo", "Westland", "Zaandstad", "Zeist", "Zoetermeer", "Zwolle"
 ];
 
 export default function UploadFormPage() {
