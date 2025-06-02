@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { CalendarView } from "../components/CalendarView";
-import { ListView } from "../components/ListView";
-import allEvents from "../data/events.json";
-import { CalendarDays, List as ListIcon, Search, Plus } from "lucide-react";
+import { CalendarView } from "../../components/CalendarView";
+import { ListView } from "../../components/ListView";
+import allEvents from "../../data/events.json";
+import { CalendarDays, List as ListIcon, Search, PlusCircle } from "lucide-react";
 import Link from "next/link";
 
 export default function HomePage() {
@@ -14,16 +14,16 @@ export default function HomePage() {
   const filteredEvents = allEvents.filter((event) => {
     const q = query.toLowerCase();
     return (
-      event.EventName?.toLowerCase().includes(q) ||
+      event.EventName.toLowerCase().includes(q) ||
       event.EventType?.toLowerCase().includes(q) ||
       event.City?.toLowerCase().includes(q)
     );
   });
 
   return (
-    <main className="bg-[#fefaf5] min-h-screen px-4 py-6 max-w-5xl mx-auto relative">
+    <main className="bg-[#fefaf5] min-h-screen px-4 py-6 max-w-5xl mx-auto">
       {/* Highlights */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-3 gap-4 mb-8">
         {filteredEvents.slice(0, 3).map((event, idx) => (
           <div
             key={idx}
@@ -43,29 +43,31 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* Toggle + zoekfunctie */}
-      <div className="flex justify-end items-center gap-2 mb-4">
-        <button
-          onClick={() => setView("calendar")}
-          className={`p-2 rounded-xl transition ${
-            view === "calendar"
-              ? "bg-[#c9b6a0] text-white"
-              : "bg-white border border-[#e1d8cf] text-[#5f5247]"
-          }`}
-        >
-          <CalendarDays size={18} />
-        </button>
-        <button
-          onClick={() => setView("list")}
-          className={`p-2 rounded-xl transition ${
-            view === "list"
-              ? "bg-[#c9b6a0] text-white"
-              : "bg-white border border-[#e1d8cf] text-[#5f5247]"
-          }`}
-        >
-          <ListIcon size={18} />
-        </button>
-        <div className="relative ml-2">
+      {/* Toggle, zoek en upload */}
+      <div className="flex justify-between items-center mb-4">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setView("calendar")}
+            className={`p-2 rounded-xl transition ${
+              view === "calendar"
+                ? "bg-[#c9b6a0] text-white"
+                : "bg-white border border-[#e1d8cf] text-[#5f5247]"
+            }`}
+          >
+            <CalendarDays size={18} />
+          </button>
+          <button
+            onClick={() => setView("list")}
+            className={`p-2 rounded-xl transition ${
+              view === "list"
+                ? "bg-[#c9b6a0] text-white"
+                : "bg-white border border-[#e1d8cf] text-[#5f5247]"
+            }`}
+          >
+            <ListIcon size={18} />
+          </button>
+        </div>
+        <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9c8f85]" size={16} />
           <input
             type="text"
@@ -75,9 +77,15 @@ export default function HomePage() {
             className="pl-9 pr-3 py-1.5 text-sm border border-[#e1d8cf] rounded-xl bg-white text-[#5f5247] placeholder-[#a09388] focus:outline-none"
           />
         </div>
+        <Link
+          href="/upload"
+          className="flex items-center gap-1 text-[#5f5247] border border-[#e1d8cf] px-3 py-1.5 rounded-xl bg-white hover:bg-[#f3ece6] transition"
+        >
+          <PlusCircle size={18} /> <span className="text-sm">Voeg event toe</span>
+        </Link>
       </div>
 
-      {/* Eventweergave */}
+      {/* Inhoud */}
       <div className="bg-white p-4 rounded-2xl shadow">
         {view === "calendar" ? (
           <CalendarView events={filteredEvents} />
@@ -85,15 +93,6 @@ export default function HomePage() {
           <ListView events={filteredEvents} />
         )}
       </div>
-
-      {/* Upload knop */}
-      <Link href="/upload">
-        <div className="fixed bottom-6 right-6 z-50">
-          <button className="bg-[#c9b6a0] hover:bg-[#bba795] transition text-white rounded-full p-4 shadow-xl">
-            <Plus size={24} />
-          </button>
-        </div>
-      </Link>
     </main>
   );
 }
