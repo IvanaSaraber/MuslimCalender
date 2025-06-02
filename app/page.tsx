@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { CalendarView } from "../../components/CalendarView";
-import { ListView } from "../../components/ListView";
-import allEvents from "../../data/events.json";
+import { CalendarView } from "../components/CalendarView";
+import { ListView } from "../components/ListView";
+import allEvents from "../data/events.json";
 import { CalendarDays, List as ListIcon, Search, PlusCircle } from "lucide-react";
 import Link from "next/link";
 
