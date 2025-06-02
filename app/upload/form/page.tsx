@@ -1,6 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { Clock, MapPin, CalendarDays, Building2 } from "lucide-react";
+
+const cities = [
+  "Amsterdam", "Rotterdam", "Den Haag", "Utrecht", "Eindhoven", "Tilburg", "Groningen", "Almere",
+  "Breda", "Nijmegen", "Enschede", "Apeldoorn", "Haarlem", "Arnhem", "Zaanstad", "Amersfoort",
+  "Haarlemmermeer", "s-Hertogenbosch", "Zwolle", "Zoetermeer", "Leiden", "Maastricht", "Dordrecht",
+  "Ede", "Emmen", "Westland", "Venlo", "Delft", "Deventer", "Sittard-Geleen", "Helmond", "Heerlen",
+  "Lelystad", "Alkmaar", "Leeuwarden", "Alphen aan den Rijn", "Almelo", "Gouda", "Assen", "Roosendaal",
+  "Bergen op Zoom", "Rijswijk", "Oss", "Hoorn", "Veenendaal", "Purmerend", "Middelburg", "Zeist",
+  "Katwijk", "Nieuwegein", "Doetinchem", "Overig"
+];
 
 export default function UploadFormPage() {
   const [formData, setFormData] = useState({
@@ -57,35 +68,114 @@ export default function UploadFormPage() {
   };
 
   return (
-    <main className="p-6 max-w-2xl mx-auto">
+    <main className="p-6 max-w-2xl mx-auto bg-white shadow-lg rounded-2xl mt-6">
       <h1 className="text-2xl font-semibold mb-4 text-center">Voeg een evenement toe</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <input name="EventName" placeholder="Naam van het event" value={formData.EventName} onChange={handleChange} required className="w-full p-3 border rounded" />
-        <textarea name="Description" placeholder="Beschrijving" value={formData.Description} onChange={handleChange} className="w-full p-3 border rounded" />
-        <input name="EventType" placeholder="Type (iftar, lezing...)" value={formData.EventType} onChange={handleChange} className="w-full p-3 border rounded" />
-        <input type="date" name="Date" value={formData.Date} onChange={handleChange} required className="w-full p-3 border rounded" />
-        <input type="time" name="StartTime" value={formData.StartTime} onChange={handleChange} className="w-full p-3 border rounded" />
-        <input type="time" name="EndTime" value={formData.EndTime} onChange={handleChange} className="w-full p-3 border rounded" />
-        <input name="City" placeholder="Stad" value={formData.City} onChange={handleChange} className="w-full p-3 border rounded" />
-        <input name="Location" placeholder="Locatie" value={formData.Location} onChange={handleChange} className="w-full p-3 border rounded" />
-        <select name="Gender" value={formData.Gender} onChange={handleChange} className="w-full p-3 border rounded">
-          <option value="">Doelgroep</option>
-          <option value="gemengd">Gemengd</option>
-          <option value="mannen">Mannen</option>
-          <option value="vrouwen">Vrouwen</option>
-        </select>
-        <select name="Language" value={formData.Language} onChange={handleChange} className="w-full p-3 border rounded">
-          <option value="">Taal</option>
-          <option value="Nederlands">Nederlands</option>
-          <option value="Arabisch">Arabisch</option>
-          <option value="Engels">Engels</option>
-          <option value="overig">Overig</option>
-        </select>
-        <input name="Organisation" placeholder="Naam organisatie" value={formData.Organisation} onChange={handleChange} className="w-full p-3 border rounded" />
-        <button disabled={submitting} type="submit" className="w-full bg-green-600 text-white py-3 rounded">
+        {/* Event Name */}
+        <div>
+          <label className="block font-medium mb-1">
+            Naam van het event <span className="text-red-500">*</span>
+          </label>
+          <input name="EventName" required value={formData.EventName} onChange={handleChange} className="w-full p-3 border rounded" />
+        </div>
+
+        {/* Description */}
+        <div>
+          <label className="block font-medium mb-1">
+            Beschrijving <span className="text-red-500">*</span>
+          </label>
+          <textarea name="Description" required value={formData.Description} onChange={handleChange} className="w-full p-3 border rounded" />
+        </div>
+
+        {/* Type */}
+        <div>
+          <label className="block font-medium mb-1">
+            Type (iftar, lezing...) <span className="text-red-500">*</span>
+          </label>
+          <input name="EventType" required value={formData.EventType} onChange={handleChange} className="w-full p-3 border rounded" />
+        </div>
+
+        {/* Date */}
+        <div>
+          <label className="block font-medium mb-1">
+            Datum <span className="text-red-500">*</span>
+          </label>
+          <input type="date" name="Date" required value={formData.Date} onChange={handleChange} className="w-full p-3 border rounded" />
+        </div>
+
+        {/* Time: Start & End */}
+        <div className="flex gap-4">
+          <div className="w-1/2">
+            <label className="block font-medium mb-1 flex items-center gap-1">
+              <Clock size={16} /> Begintijd <span className="text-red-500">*</span>
+            </label>
+            <input type="time" name="StartTime" required value={formData.StartTime} onChange={handleChange} className="w-full p-3 border rounded" />
+          </div>
+          <div className="w-1/2">
+            <label className="block font-medium mb-1 flex items-center gap-1">
+              <Clock size={16} /> Eindtijd <span className="text-red-500">*</span>
+            </label>
+            <input type="time" name="EndTime" required value={formData.EndTime} onChange={handleChange} className="w-full p-3 border rounded" />
+          </div>
+        </div>
+
+        {/* City */}
+        <div>
+          <label className="block font-medium mb-1">
+            Stad <span className="text-red-500">*</span>
+          </label>
+          <select name="City" required value={formData.City} onChange={handleChange} className="w-full p-3 border rounded">
+            <option value="">Kies een stad</option>
+            {cities.map((city) => (
+              <option key={city} value={city}>{city}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Location */}
+        <div>
+          <label className="block font-medium mb-1">
+            Locatie (adres of naam zaal) <span className="text-red-500">*</span>
+          </label>
+          <input name="Location" required value={formData.Location} onChange={handleChange} className="w-full p-3 border rounded" />
+        </div>
+
+        {/* Gender */}
+        <div>
+          <label className="block font-medium mb-1">Doelgroep</label>
+          <select name="Gender" value={formData.Gender} onChange={handleChange} className="w-full p-3 border rounded">
+            <option value="">Kies doelgroep</option>
+            <option value="gemengd">Gemengd</option>
+            <option value="mannen">Mannen</option>
+            <option value="vrouwen">Vrouwen</option>
+            <option value="overig">Overig</option>
+          </select>
+        </div>
+
+        {/* Language */}
+        <div>
+          <label className="block font-medium mb-1">Taal</label>
+          <select name="Language" value={formData.Language} onChange={handleChange} className="w-full p-3 border rounded">
+            <option value="">Kies een taal</option>
+            <option value="Nederlands">Nederlands</option>
+            <option value="Arabisch">Arabisch</option>
+            <option value="Engels">Engels</option>
+            <option value="overig">Overig</option>
+          </select>
+        </div>
+
+        {/* Organisation */}
+        <div>
+          <label className="block font-medium mb-1">Naam organisatie</label>
+          <input name="Organisation" value={formData.Organisation} onChange={handleChange} className="w-full p-3 border rounded" />
+        </div>
+
+        {/* Submit */}
+        <button disabled={submitting} type="submit" className="w-full bg-green-600 text-white py-3 rounded hover:bg-green-700 transition">
           {submitting ? "Versturen..." : "Verstuur"}
         </button>
+
         {success && <p className="text-green-600 text-center">✅ Evenement succesvol toegevoegd!</p>}
       </form>
     </main>
