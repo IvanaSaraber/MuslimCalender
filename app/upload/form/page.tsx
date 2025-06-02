@@ -126,12 +126,29 @@ export default function UploadFormPage() {
           <label className="block font-medium mb-1">
             Stad <span className="text-red-500">*</span>
           </label>
-          <select name="City" required value={formData.City} onChange={handleChange} className="w-full p-3 border rounded">
-            <option value="">Kies een stad</option>
-            {cities.map((city) => (
-              <option key={city} value={city}>{city}</option>
+          <input
+            list="city-options"
+            name="City"
+            placeholder="Kies een stad"
+            value={formData.City}
+            onChange={handleChange}
+            required
+            className="w-full p-3 border rounded"
+          />
+          <datalist id="city-options">
+              {[
+                "Alkmaar", "Almelo", "Almere", "Alphen aan den Rijn", "Amersfoort", "Amsterdam",
+                "Apeldoorn", "Arnhem", "Assen", "Bergen op Zoom", "Breda", "Delft", "Den Haag",
+                "Deventer", "Dordrecht", "Doetinchem", "Ede", "Eindhoven", "Emmen", "Enschede",
+                "Gouda", "Groningen", "Haarlem", "Haarlemmermeer", "Heerlen", "Helmond", "Hoorn",
+                "Katwijk", "Leeuwarden", "Leiden", "Lelystad", "Maastricht", "Middelburg",
+                "Nieuwegein", "Nijmegen", "Oss", "Overig", "Purmerend", "Rijswijk", "Roosendaal",
+                "Rotterdam", "Sittard-Geleen", "s-Hertogenbosch", "Tilburg", "Utrecht", "Veenendaal",
+                "Venlo", "Westland", "Zaandstad", "Zeist", "Zoetermeer", "Zwolle"
+              ].sort().map((city) => (
+                <option key={city} value={city} />
             ))}
-          </select>
+          </datalist>
         </div>
 
         {/* Location */}
