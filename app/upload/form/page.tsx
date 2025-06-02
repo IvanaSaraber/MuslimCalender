@@ -9,9 +9,9 @@ const cities = [
   "Deventer", "Dordrecht", "Doetinchem", "Ede", "Eindhoven", "Emmen", "Enschede",
   "Gouda", "Groningen", "Haarlem", "Haarlemmermeer", "Heerlen", "Helmond", "Hoorn",
   "Katwijk", "Leeuwarden", "Leiden", "Lelystad", "Maastricht", "Middelburg",
-  "Nieuwegein", "Nijmegen", "Oss", "Overig", "Purmerend", "Rijswijk", "Roosendaal",
+  "Nieuwegein", "Nijmegen", "Oss", "Purmerend", "Rijswijk", "Roosendaal",
   "Rotterdam", "Sittard-Geleen", "s-Hertogenbosch", "Tilburg", "Utrecht", "Veenendaal",
-  "Venlo", "Westland", "Zaandstad", "Zeist", "Zoetermeer", "Zwolle"
+  "Venlo", "Westland", "Zaandstad", "Zeist", "Zoetermeer", "Zwolle", "Overig"
 ].sort();
 
 export default function UploadFormPage() {
