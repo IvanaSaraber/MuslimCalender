@@ -106,20 +106,37 @@ export default function UploadFormPage() {
         </div>
 
         {/* Time: Start & End */}
-        <div className="flex gap-4">
-          <div className="w-1/2">
-            <label className="block font-medium mb-1 flex items-center gap-1">
-              <Clock size={16} /> Begintijd <span className="text-red-500">*</span>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex-1">
+            <label htmlFor="StartTime" className="block text-sm font-medium text-[#422c1b] mb-1">
+              Starttijd
             </label>
-            <input type="time" name="StartTime" required value={formData.StartTime} onChange={handleChange} className="w-full p-3 border rounded" />
+            <input
+              type="time"
+              name="StartTime"
+              id="StartTime"
+              value={formData.StartTime}
+              onChange={handleChange}
+              required
+              className="w-full p-3 border rounded"
+            />
           </div>
-          <div className="w-1/2">
-            <label className="block font-medium mb-1 flex items-center gap-1">
-              <Clock size={16} /> Eindtijd <span className="text-red-500">*</span>
+          <div className="flex-1">
+            <label htmlFor="EndTime" className="block text-sm font-medium text-[#422c1b] mb-1">
+              Eindtijd
             </label>
-            <input type="time" name="EndTime" required value={formData.EndTime} onChange={handleChange} className="w-full p-3 border rounded" />
+            <input
+              type="time"
+              name="EndTime"
+              id="EndTime"
+              value={formData.EndTime}
+              onChange={handleChange}
+              required
+              className="w-full p-3 border rounded"
+            />
           </div>
         </div>
+
 
         {/* City */}
         <div>
