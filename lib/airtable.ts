@@ -9,3 +9,8 @@ const base = new Airtable({ apiKey }).base(baseId);
 
 export const organisationTableRef = base(organisationTable);
 export const eventTableRef = base(eventTable);
+
+// ✅ Toegevoegd: functie om een event aan te maken
+export const addEventToAirtable = async (fields: any) => {
+  return await eventTableRef.create([{ fields }]);
+};
