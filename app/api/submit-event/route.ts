@@ -1,13 +1,26 @@
+// app/api/submit-event/route.ts
 import { NextResponse } from "next/server";
-import { eventTableRef } from "../../../lib/airtable";
+import { addEventToAirtable } from "@/lib/airtable";
 
 export async function POST(req: Request) {
   try {
-    const data = await req.json();
-    await eventTableRef.create(data);
-    return NextResponse.json({ ok: true });
+    const body = await req.json();
+
+    const requiredFields = [
+      "EventName", "Description", "EventType", "Date",
+      "StartTime", "EndTime", "City", "Location"
+    ];
+
+    for (const field of requiredFields) {
+      if (!body[field]) {
+        return NextResponse.json({ error: `${field} is required.` }, { status: 400 });
+      }
+    }
+
+    const res = await addEventToAirtable(body);
+    return NextResponse.json({ message: "Success", id: res[0].id });
   } catch (error) {
-    console.error("Fout bij toevoegen aan Airtable:", error);
-    return NextResponse.json({ ok: false, error: "Mislukt" }, { status: 500 });
+    console.error("Upload error:", error);
+    return NextResponse.json({ error: "Upload failed" }, { status: 500 });
   }
 }
