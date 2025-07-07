@@ -1,6 +1,7 @@
 // app/api/submit-event/route.ts
 import { NextResponse } from "next/server";
-import { addEventToAirtable } from "@/lib/airtable";
+import { addEventToAirtable } from "../../../lib/airtable";
+
 
 export async function POST(req: Request) {
   try {
