@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Clock, MapPin, CalendarDays, Building2, Users } from "lucide-react";
 
 const cities = [
   "Alkmaar", "Almelo", "Almere", "Alphen aan den Rijn", "Amersfoort", "Amsterdam",
@@ -31,7 +30,7 @@ export default function UploadFormPage() {
     Speaker2: "",
     Speaker3: "",
     Speaker4: "",
-    Comments: ""
+    Comments: "",
   });
 
   const [submitting, setSubmitting] = useState(false);
@@ -71,7 +70,7 @@ export default function UploadFormPage() {
         Speaker2: "",
         Speaker3: "",
         Speaker4: "",
-        Comments: ""
+        Comments: "",
       });
     }
 
@@ -83,37 +82,43 @@ export default function UploadFormPage() {
       <h1 className="text-2xl font-semibold mb-4 text-center">Voeg een evenement toe</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Event Name */}
         <div>
           <label className="block font-medium mb-1">Naam van het event <span className="text-red-500">*</span></label>
           <input name="EventName" required value={formData.EventName} onChange={handleChange} className="w-full p-3 border rounded" />
         </div>
 
+        {/* Description */}
         <div>
           <label className="block font-medium mb-1">Beschrijving <span className="text-red-500">*</span></label>
           <textarea name="Description" required value={formData.Description} onChange={handleChange} className="w-full p-3 border rounded" />
         </div>
 
+        {/* Event Type */}
         <div>
           <label className="block font-medium mb-1">Type (iftar, lezing...) <span className="text-red-500">*</span></label>
           <input name="EventType" required value={formData.EventType} onChange={handleChange} className="w-full p-3 border rounded" />
         </div>
 
+        {/* Date */}
         <div>
           <label className="block font-medium mb-1">Datum <span className="text-red-500">*</span></label>
           <input type="date" name="Date" required value={formData.Date} onChange={handleChange} className="w-full p-3 border rounded" />
         </div>
 
+        {/* Time */}
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
-            <label className="block font-medium mb-1">Starttijd <span className="text-red-500">*</span></label>
+            <label htmlFor="StartTime" className="block font-medium mb-1">Starttijd <span className="text-red-500">*</span></label>
             <input type="time" name="StartTime" required value={formData.StartTime} onChange={handleChange} className="w-full p-3 border rounded" />
           </div>
           <div className="flex-1">
-            <label className="block font-medium mb-1">Eindtijd <span className="text-red-500">*</span></label>
+            <label htmlFor="EndTime" className="block font-medium mb-1">Eindtijd <span className="text-red-500">*</span></label>
             <input type="time" name="EndTime" required value={formData.EndTime} onChange={handleChange} className="w-full p-3 border rounded" />
           </div>
         </div>
 
+        {/* City */}
         <div>
           <label className="block font-medium mb-1">Stad <span className="text-red-500">*</span></label>
           <input list="city-options" name="City" required value={formData.City} onChange={handleChange} className="w-full p-3 border rounded" />
@@ -122,28 +127,22 @@ export default function UploadFormPage() {
           </datalist>
         </div>
 
+        {/* Address */}
         <div>
           <label className="block font-medium mb-1">Adres <span className="text-red-500">*</span></label>
           <input name="Address" required value={formData.Address} onChange={handleChange} className="w-full p-3 border rounded" />
         </div>
 
+        {/* Speakers */}
         <div>
-          <label className="block font-medium mb-1">Spreker (verplicht)</label>
-          <input name="Speaker" required value={formData.Speaker} onChange={handleChange} className="w-full p-3 border rounded" />
-        </div>
-        <div>
-          <label className="block font-medium mb-1">Spreker 2 (optioneel)</label>
-          <input name="Speaker2" value={formData.Speaker2} onChange={handleChange} className="w-full p-3 border rounded" />
-        </div>
-        <div>
-          <label className="block font-medium mb-1">Spreker 3 (optioneel)</label>
-          <input name="Speaker3" value={formData.Speaker3} onChange={handleChange} className="w-full p-3 border rounded" />
-        </div>
-        <div>
-          <label className="block font-medium mb-1">Spreker 4 (optioneel)</label>
-          <input name="Speaker4" value={formData.Speaker4} onChange={handleChange} className="w-full p-3 border rounded" />
+          <label className="block font-medium mb-1">Spreker(s) <span className="text-red-500">*</span></label>
+          <input name="Speaker" required value={formData.Speaker} onChange={handleChange} className="w-full p-3 border rounded mb-2" />
+          <input name="Speaker2" placeholder="Spreker 2 (optioneel)" value={formData.Speaker2} onChange={handleChange} className="w-full p-3 border rounded mb-2" />
+          <input name="Speaker3" placeholder="Spreker 3 (optioneel)" value={formData.Speaker3} onChange={handleChange} className="w-full p-3 border rounded mb-2" />
+          <input name="Speaker4" placeholder="Spreker 4 (optioneel)" value={formData.Speaker4} onChange={handleChange} className="w-full p-3 border rounded" />
         </div>
 
+        {/* Gender */}
         <div>
           <label className="block font-medium mb-1">Doelgroep</label>
           <select name="Gender" value={formData.Gender} onChange={handleChange} className="w-full p-3 border rounded">
@@ -155,6 +154,7 @@ export default function UploadFormPage() {
           </select>
         </div>
 
+        {/* Language */}
         <div>
           <label className="block font-medium mb-1">Taal</label>
           <select name="Language" value={formData.Language} onChange={handleChange} className="w-full p-3 border rounded">
@@ -166,16 +166,19 @@ export default function UploadFormPage() {
           </select>
         </div>
 
+        {/* Organisation */}
         <div>
           <label className="block font-medium mb-1">Naam organisatie</label>
           <input name="Organisation" value={formData.Organisation} onChange={handleChange} className="w-full p-3 border rounded" />
         </div>
 
+        {/* Comments */}
         <div>
-          <label className="block font-medium mb-1">Opmerkingen / instructies (optioneel)</label>
+          <label className="block font-medium mb-1">Opmerkingen (bijv. route of instructies)</label>
           <textarea name="Comments" value={formData.Comments} onChange={handleChange} className="w-full p-3 border rounded" />
         </div>
 
+        {/* Submit */}
         <button disabled={submitting} type="submit" className="w-full bg-green-600 text-white py-3 rounded hover:bg-green-700 transition">
           {submitting ? "Versturen..." : "Verstuur"}
         </button>
