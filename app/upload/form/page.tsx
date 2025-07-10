@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Clock, MapPin, CalendarDays, Building2, Pencil } from "lucide-react";
+import { Clock, MapPin, CalendarDays, Building2, Users } from "lucide-react";
 
 const cities = [
   "Alkmaar", "Almelo", "Almere", "Alphen aan den Rijn", "Amersfoort", "Amsterdam",
@@ -23,10 +23,15 @@ export default function UploadFormPage() {
     StartTime: "",
     EndTime: "",
     City: "",
-    Location: "",
+    Address: "",
     Gender: "",
     Language: "",
     Organisation: "",
+    Speaker: "",
+    Speaker2: "",
+    Speaker3: "",
+    Speaker4: "",
+    Comments: ""
   });
 
   const [submitting, setSubmitting] = useState(false);
@@ -58,10 +63,15 @@ export default function UploadFormPage() {
         StartTime: "",
         EndTime: "",
         City: "",
-        Location: "",
+        Address: "",
         Gender: "",
         Language: "",
         Organisation: "",
+        Speaker: "",
+        Speaker2: "",
+        Speaker3: "",
+        Speaker4: "",
+        Comments: ""
       });
     }
 
@@ -95,28 +105,43 @@ export default function UploadFormPage() {
 
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
-            <label htmlFor="StartTime" className="block text-sm font-medium text-[#422c1b] mb-1">Starttijd <span className="text-red-500">*</span></label>
-            <input type="time" name="StartTime" id="StartTime" value={formData.StartTime} onChange={handleChange} required className="w-full p-3 border rounded" />
+            <label className="block font-medium mb-1">Starttijd <span className="text-red-500">*</span></label>
+            <input type="time" name="StartTime" required value={formData.StartTime} onChange={handleChange} className="w-full p-3 border rounded" />
           </div>
           <div className="flex-1">
-            <label htmlFor="EndTime" className="block text-sm font-medium text-[#422c1b] mb-1">Eindtijd <span className="text-red-500">*</span></label>
-            <input type="time" name="EndTime" id="EndTime" value={formData.EndTime} onChange={handleChange} required className="w-full p-3 border rounded" />
+            <label className="block font-medium mb-1">Eindtijd <span className="text-red-500">*</span></label>
+            <input type="time" name="EndTime" required value={formData.EndTime} onChange={handleChange} className="w-full p-3 border rounded" />
           </div>
         </div>
 
         <div>
           <label className="block font-medium mb-1">Stad <span className="text-red-500">*</span></label>
-          <input list="city-options" name="City" placeholder="Kies een stad" value={formData.City} onChange={handleChange} required className="w-full p-3 border rounded" />
+          <input list="city-options" name="City" required value={formData.City} onChange={handleChange} className="w-full p-3 border rounded" />
           <datalist id="city-options">
-            {cities.map((city) => (
-              <option key={city} value={city} />
-            ))}
+            {cities.map((city) => <option key={city} value={city} />)}
           </datalist>
         </div>
 
         <div>
-          <label className="block font-medium mb-1">Locatie (adres of naam zaal) <span className="text-red-500">*</span></label>
-          <input name="Location" required value={formData.Location} onChange={handleChange} className="w-full p-3 border rounded" />
+          <label className="block font-medium mb-1">Adres <span className="text-red-500">*</span></label>
+          <input name="Address" required value={formData.Address} onChange={handleChange} className="w-full p-3 border rounded" />
+        </div>
+
+        <div>
+          <label className="block font-medium mb-1">Spreker (verplicht)</label>
+          <input name="Speaker" required value={formData.Speaker} onChange={handleChange} className="w-full p-3 border rounded" />
+        </div>
+        <div>
+          <label className="block font-medium mb-1">Spreker 2 (optioneel)</label>
+          <input name="Speaker2" value={formData.Speaker2} onChange={handleChange} className="w-full p-3 border rounded" />
+        </div>
+        <div>
+          <label className="block font-medium mb-1">Spreker 3 (optioneel)</label>
+          <input name="Speaker3" value={formData.Speaker3} onChange={handleChange} className="w-full p-3 border rounded" />
+        </div>
+        <div>
+          <label className="block font-medium mb-1">Spreker 4 (optioneel)</label>
+          <input name="Speaker4" value={formData.Speaker4} onChange={handleChange} className="w-full p-3 border rounded" />
         </div>
 
         <div>
@@ -144,6 +169,11 @@ export default function UploadFormPage() {
         <div>
           <label className="block font-medium mb-1">Naam organisatie</label>
           <input name="Organisation" value={formData.Organisation} onChange={handleChange} className="w-full p-3 border rounded" />
+        </div>
+
+        <div>
+          <label className="block font-medium mb-1">Opmerkingen / instructies (optioneel)</label>
+          <textarea name="Comments" value={formData.Comments} onChange={handleChange} className="w-full p-3 border rounded" />
         </div>
 
         <button disabled={submitting} type="submit" className="w-full bg-green-600 text-white py-3 rounded hover:bg-green-700 transition">
