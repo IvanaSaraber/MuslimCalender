@@ -1,7 +1,6 @@
 // app/api/submit-event/route.ts
 import { NextResponse } from "next/server";
-import { addEventToAirtable } from "../../../lib/airtable";
-
+import { addEventToAirtable } from "@/lib/airtable";
 
 export async function POST(req: Request) {
   try {
@@ -9,7 +8,7 @@ export async function POST(req: Request) {
 
     const requiredFields = [
       "EventName", "Description", "EventType", "Date",
-      "StartTime", "EndTime", "City", "Location"
+      "StartTime", "EndTime", "City", "Address", "Speaker"
     ];
 
     for (const field of requiredFields) {
